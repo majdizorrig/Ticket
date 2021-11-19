@@ -14,14 +14,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class TicketController extends AbstractController
 {
-    #[Route('/ticket', name: 'ticket')]
 
-    public function index(): Response
-    {
-        return $this->render('ticket/index.html.twig', [
-            'controller_name' => 'TicketController',
-        ]);
-    }
 
 
     #[Route('add/{titre}/{nompersonne}/{description}', name: 'ticket.add')]
@@ -32,22 +25,16 @@ class TicketController extends AbstractController
         $ticket->setNomPersonne($nompersonne);
         $ticket->setDescription($description);
         $ticket->setStatut("EN ATTENTE");
-
-
-
-                $today = getdate();
+        $today = getdate();
         $ticket->setDate($today['mday'].'/'.$today['mon'].'/'.$today['year']);
-//
 
         $manager->persist($ticket);
-//
-
         $manager->flush();
         $this->addFlash('success', "Ticket ADDED");
         return $this->render('ticket/index.html.twig', [
             'controller_name' => 'TicketController',
             'ticket'=>$ticket,
-            //'sysdate'=>$datenow
+
         ]);
     }
 
