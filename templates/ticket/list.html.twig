@@ -18,14 +18,5 @@
 {% endfor %}
     </div>
 
-    <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    {% for i in 1..nbpage %}
-    <li class="page-item"><a class="page-link" href="{{ path('ticket.list',{nbpage:i}) }}">{{ i }}</a></li>
-      {% endfor %}
 
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
  {% endblock %}
