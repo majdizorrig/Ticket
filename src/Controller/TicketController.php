@@ -90,6 +90,7 @@ class TicketController extends AbstractController
     }
 
 
+
     #[Route('/all/{nbPage?1}', name: 'ticket.list')]
     public function listAllTickets($nbPage) {
         $limit = 3;
@@ -116,6 +117,23 @@ class TicketController extends AbstractController
 //
         return $this->render('ticket/list-par-interv-date.html.twig', [
             'tickets' => $tickets
+        ]);
+    }
+
+
+    #[Route('/byStatut/{statut}', name: 'ticket.listByStatut')]
+    public function TicketsByStatut($statut) {
+//
+
+
+        $repository = $this->getDoctrine()->getRepository(ticket::class);
+
+        $tickets = $repository->findBy(['statut'=>$statut]);
+
+
+        return $this->render('ticket/list.html.twig', [
+            'tickets' => $tickets,
+
         ]);
     }
 
