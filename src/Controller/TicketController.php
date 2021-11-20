@@ -64,11 +64,13 @@ class TicketController extends AbstractController
 
             $manager->remove($ticket);
             $manager->flush();
-            $this->addFlash('success', "Ticket DELETED");
+            //$this->addFlash('success', "Ticket DELETED");
         } else {
-            $this->addFlash('error', "ID NOT FOUND");
+           // $this->addFlash('error', "ID NOT FOUND");
         }
-        return $this->forward('App\Controller\TicketController::listAllTickets');
+        return $this->render('ticket/index.html.twig', [
+            'ticket' => $ticket
+        ]);
 
     }
 
@@ -104,7 +106,8 @@ class TicketController extends AbstractController
 
         return $this->render('ticket/list.html.twig', [
             'tickets' => $tickets,
-            'nbpage'  =>$nbPage
+            'nbPage'  =>$nbPage
+
         ]);
     }
 
@@ -137,7 +140,24 @@ class TicketController extends AbstractController
         ]);
     }
 
+    #[Route('/all', name: 'ticket.list1')]
+    public function listAllTickets1()
+    {
+//        $limit = 3;
+//        $offset = ($nbPage - 1) * $limit;
 
+
+        $repository = $this->getDoctrine()->getRepository(ticket::class);
+
+        $tickets = $repository->findBy([], []);
+
+
+        return $this->render('ticket/list.html.twig', [
+            'tickets' => $tickets,
+
+
+        ]);
+    }
 
 
 }

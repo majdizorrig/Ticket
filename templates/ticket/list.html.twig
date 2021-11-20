@@ -12,7 +12,8 @@
             <br>Statut : {{ ticket.statut }}
             <br>Date : {{ ticket.date }}
         </p>
-        <a href="{{path('ticket.delete',{id : ticket.id})}}" class="btn btn-primary">Delete</a>
+        <a href="{{path('ticket.ticketById',{id : ticket.id})}}" class="btn btn-primary">Details</a>
+            <a href="{{path('ticket.delete',{id : ticket.id})}}" class="btn btn-primary">Delete</a>
     </div>
 </div>
 {% endfor %}
