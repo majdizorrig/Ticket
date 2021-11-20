@@ -68,7 +68,7 @@ class TicketController extends AbstractController
         } else {
            // $this->addFlash('error', "ID NOT FOUND");
         }
-        return $this->render('ticket/index.html.twig', [
+        return $this->forward('App\Controller\TicketController:listAllTickets',['nbPage'=>1],[
             'ticket' => $ticket
         ]);
 
